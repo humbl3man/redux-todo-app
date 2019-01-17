@@ -6,7 +6,6 @@ import { changeVisibilityFilter } from "./../state/actions";
 const FilterBar = styled.div`
   margin-top: 3rem;
   padding: 2rem;
-  background: #fafafa;
   border: 1px solid #eee;
 `;
 const FilterLink = styled.button`

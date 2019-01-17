@@ -12,7 +12,7 @@ const GlobalStyle = createGlobalStyle`
     padding: 0;
     margin: 0;
     font-size: 1.5rem;
-    font-family: Arial, Helvetica, sans-serif;
+    font-family: 'Open Sans', Arial, Helvetica, sans-serif;
   }
 
 `;
@@ -27,7 +27,10 @@ const App = () => {
   return (
     <React.Fragment>
       <GlobalStyle />
-      <PageContent>
+      <PageContent
+        className="animated fadeInUp"
+        style={{ animationDuration: "300ms" }}
+      >
         <AddTodo />
         <TodoList />
         <Filter />

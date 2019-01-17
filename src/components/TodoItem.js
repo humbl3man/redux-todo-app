@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import styled from "styled-components";
 
 const StyledTodo = styled.li`
-  padding: 20px 8px;
+  padding: 20px 3px;
   border-bottom: 1px solid #131313;
   text-decoration: ${props => (props.completed ? "line-through" : "none")};
 
@@ -27,7 +27,6 @@ const StyledTodo = styled.li`
     visibility: hidden;
     margin-left: 14px;
     appearance: none;
-    border: 1px solid #131313;
     color: #131313;
     padding: 0.7rem;
     cursor: pointer;
@@ -115,7 +114,10 @@ class TodoItem extends Component {
 
   render() {
     return (
-      <StyledTodo completed={this.props.todo.completed}>
+      <StyledTodo
+        style={{ animationDuration: "300ms" }}
+        completed={this.props.todo.completed}
+      >
         {!this.state.editMode && (
           <label>
             <input
