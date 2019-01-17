@@ -68,11 +68,13 @@ class TodoItem extends Component {
   };
 
   handleTodoChangeSubmit = e => {
+    const { text } = this.state;
+    const { id } = this.props.todo;
     e.preventDefault();
-    this.props.updateTodo(this.props.todo.id, this.state.text);
+    this.props.updateTodo(id, text);
     this.setState({
       editMode: false,
-      origText: this.state.text
+      origText: text
     });
   };
 
@@ -88,9 +90,10 @@ class TodoItem extends Component {
   };
 
   disableEditMode = () => {
+    const { origText } = this.state;
     this.setState({
       editMode: false,
-      text: this.state.origText
+      text: origText
     });
   };
 
@@ -99,12 +102,14 @@ class TodoItem extends Component {
   };
 
   renderTodoInput = () => {
+    const { text } = this.state;
+
     return (
       <form onSubmit={this.handleTodoChangeSubmit}>
         <input
           ref={input => (this.inputNode = input)}
           type="text"
-          value={this.state.text}
+          value={text}
           onChange={this.handleTodoUpdate}
           onBlur={this.disableEditMode}
         />
@@ -113,34 +118,34 @@ class TodoItem extends Component {
   };
 
   render() {
+    const { editMode } = this.state;
+    const { completed, id, index, toggleTodo, removeTodo } = this.props;
+
     return (
-      <StyledTodo
-        style={{ animationDuration: "300ms" }}
-        completed={this.props.todo.completed}
-      >
+      <StyledTodo style={{ animationDuration: "300ms" }} completed={completed}>
         {!this.state.editMode && (
           <label>
             <input
               type="checkbox"
-              checked={this.props.todo.completed}
+              checked={completed}
               onChange={() => {
-                this.props.toggleTodo(this.props.todo.id);
+                toggleTodo(id);
               }}
             />
             {this.renderTodoText()}
           </label>
         )}
-        {this.state.editMode && this.renderTodoInput()}
+        {editMode && this.renderTodoInput()}
         <button
           data-action="remove"
           type="button"
           onClick={() => {
-            this.props.removeTodo(this.props.index);
+            removeTodo(index);
           }}
         >
           Remove <i className="far fa-times-circle" />
         </button>
-        {!this.state.editMode ? (
+        {!editMode ? (
           <button
             data-action="edit"
             type="button"
